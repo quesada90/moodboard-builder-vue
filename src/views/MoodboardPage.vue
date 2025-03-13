@@ -85,7 +85,7 @@
     <delete-modal
       :show="showDeleteModal"
       @cancel="showDeleteModal = false"
-      @confirm="deleteMoodboard"
+      @confirm="deleteMoodboardConfirm"
     />
   </div>
 </template>

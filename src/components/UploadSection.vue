@@ -95,20 +95,54 @@ export default {
     handleFiles(files) {
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const reader = new FileReader();
+        this.compressAndAddImage(file);
+      }
+    },
+    compressAndAddImage(file) {
+      const reader = new FileReader();
 
-        reader.onload = (e) => {
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          // Crea un canvas para la compresión
+          const canvas = document.createElement("canvas");
+          // Reduce el tamaño si es necesario
+          const MAX_WIDTH = 800;
+          const MAX_HEIGHT = 600;
+          let width = img.width;
+          let height = img.height;
+
+          // Calcula las nuevas dimensiones manteniendo la relación de aspecto
+          if (width > MAX_WIDTH) {
+            height = Math.round(height * (MAX_WIDTH / width));
+            width = MAX_WIDTH;
+          }
+          if (height > MAX_HEIGHT) {
+            width = Math.round(width * (MAX_HEIGHT / height));
+            height = MAX_HEIGHT;
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Comprime la imagen (ajusta la calidad según sea necesario)
+          const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.6);
+
           const image = {
-            id: Date.now() + i,
-            url: e.target.result,
+            id: Date.now() + Math.floor(Math.random() * 1000),
+            url: compressedDataUrl,
             alt: file.name,
           };
 
           this.$emit("image-added", image);
         };
+        img.src = e.target.result;
+      };
 
-        reader.readAsDataURL(file);
-      }
+      reader.readAsDataURL(file);
     },
     addImageFromUrl() {
       const urls = this.imageUrl

@@ -1,0 +1,39 @@
+:root {
+   /* Grays */
+   --grey-000: #FFFFFF;
+   --grey-100: #F9FAFC;
+   --grey-200: #F2F4F9;
+   --grey-300: #DADCE2;
+   --grey-400: #C3C5CC;
+   --grey-500: #ABADB5;
+   --grey-600: #93959E;
+   --grey-700: #717279;
+   --grey-800: #4E4F54;
+   --grey-900: #2B2C2F;
+   --grey-1000: #09090A;
+   
+   /* Oranges */
+   --orange-100: #FFFBE1;
+   --orange-200: #FFF3B6;
+   --orange-300: #FECD89;
+   --orange-400: #FCA85B;
+   --orange-500: #FB832E;
+   --orange-600: #F95D00;
+   --orange-700: #C34800;
+   --orange-800: #8C3300;
+   --orange-900: #561D00;
+   --orange-1000: #1F0800;
+   
+   /* Additional colors */
+   --red: #F90800;
+   --green: #71EF22;
+   
+   /* Text Sizes */
+   --title-h1: 5.33rem; /* 96px */
+   --title-h2: 3.56rem; /* 64px */
+   --title-h3: 2.67rem; /* 48px */
+   --title-h4: 1.33rem; /* 24px */
+   --text-subtitle: 1.33rem; /* 24px */
+   --text-copy: 1rem; /* 18px */
+   --text-copy-small: 0.78rem; /* 14px */
+}

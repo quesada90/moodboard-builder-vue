@@ -183,12 +183,13 @@ export default {
         return;
       }
 
-      this.$emit("save", {
+      const updatedData = {
         title: this.moodboardName,
-        coverImage:
-          this.coverImage ||
-          "https://images.unsplash.com/photo-1520367445093-50dc08a59d9d?w=900",
-      });
+        coverImage: this.coverImage || this.initialCoverImage,
+      };
+
+      console.log("EditModal emitiendo evento save con datos:", updatedData);
+      this.$emit("save", updatedData);
     },
   },
 };

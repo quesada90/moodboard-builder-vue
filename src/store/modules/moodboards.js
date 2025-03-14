@@ -51,9 +51,11 @@ export default {
       state.list = state.list.filter((moodboard) => moodboard.id !== id);
     },
     UPDATE_MOODBOARD(state, { id, updates }) {
+      console.log("Mutation: actualizando moodboard", id, updates);
       const index = state.list.findIndex((moodboard) => moodboard.id === id);
       if (index !== -1) {
         state.list[index] = { ...state.list[index], ...updates };
+        console.log("Moodboard actualizado:", state.list[index]);
       }
     },
     ADD_IMAGE(state, { moodboardId, image }) {
@@ -95,6 +97,7 @@ export default {
       commit("DELETE_MOODBOARD", id);
     },
     updateMoodboard({ commit }, { id, updates }) {
+      console.log("Store: actualizando moodboard", id, updates);
       commit("UPDATE_MOODBOARD", { id, updates });
     },
     addImage({ commit }, { moodboardId, image }) {

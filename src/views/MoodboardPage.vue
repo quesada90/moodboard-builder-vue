@@ -78,7 +78,7 @@
       :initial-cover-image="moodboard.coverImage"
       :is-new="false"
       @close="showEditModal = false"
-      @save="updateMoodboard"
+      @save="saveMoodboardChanges"
       @delete="confirmDeleteMoodboard"
     />
 
@@ -143,13 +143,13 @@ export default {
     },
   },
   methods: {
-    ...mapActions("moodboards", [
-      "updateMoodboard",
-      "deleteMoodboard",
-      "addImage",
-      "deleteImage",
-      "reorderImages",
-    ]),
+    ...mapActions("moodboards", {
+      updateMoodboardAction: "updateMoodboard", // Usa object mapping para renombrar
+      deleteMoodboard: "deleteMoodboard",
+      addImage: "addImage",
+      deleteImage: "deleteImage",
+      reorderImages: "reorderImages",
+    }),
     openEditModal() {
       this.showEditModal = true;
     },
@@ -205,6 +205,26 @@ export default {
         this.showDeleteImageModal = false;
         this.imageToDelete = null;
         this.showNotification("Image deleted", "error");
+      }
+    },
+    async saveMoodboardChanges(moodboardData) {
+      try {
+        console.log("Guardando cambios:", moodboardData);
+
+        // Usa el nuevo nombre de la acción
+        await this.updateMoodboardAction({
+          id: this.moodboardId,
+          updates: {
+            title: moodboardData.title,
+            coverImage: moodboardData.coverImage,
+          },
+        });
+
+        this.showEditModal = false;
+        this.showNotification("Changes saved successfully");
+      } catch (error) {
+        console.error("Error updating moodboard:", error);
+        this.showNotification("Error saving changes", "error");
       }
     },
     downloadImages() {

@@ -66,7 +66,7 @@
       <delete-image-modal
         :show="showDeleteImageModal"
         @cancel="cancelDeleteImage"
-        @confirm="deleteImage"
+        @confirm="deleteImageFromMoodboard"
       />
 
       <upload-section :moodboard-id="moodboardId" @image-added="onImageAdded" />
@@ -196,7 +196,7 @@ export default {
       this.showDeleteImageModal = false;
       this.imageToDelete = null;
     },
-    deleteImage() {
+    deleteImageFromMoodboard() {
       if (this.imageToDelete) {
         this.deleteImage({
           moodboardId: this.moodboardId,
